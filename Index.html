@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ZpA Desert Storm Sign Up</title>
+  <style>
+    :root{
+      --bg:#0b0f14;
+      --card:#121a23;
+      --text:#eaf2ff;
+      --muted:#a9b7cc;
+      --accent:#44ff9a;
+      --accent2:#5fd0ff;
+      --danger:#ff5b6e;
+      --line:rgba(255,255,255,.10);
+      --shadow:0 18px 40px rgba(0,0,0,.45);
+      --radius:18px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      background: radial-gradient(1200px 700px at 20% 10%, rgba(95,208,255,.12), transparent 60%),
+                  radial-gradient(1000px 700px at 90% 30%, rgba(68,255,154,.10), transparent 55%),
+                  var(--bg);
+      color:var(--text);
+    }
+    .wrap{max-width:980px;margin:0 auto;padding:22px}
+    .hero{
+      background: linear-gradient(135deg, rgba(95,208,255,.14), rgba(68,255,154,.10));
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      padding:18px 18px;
+      box-shadow: var(--shadow);
+    }
+    .title{
+      display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;
+    }
+    h1{margin:0;font-size:22px;letter-spacing:.2px}
+    .badge{
+      font-size:12px;color:var(--muted);
+      padding:7px 10px;border:1px solid var(--line);
+      border-radius:999px;background:rgba(0,0,0,.18)
+    }
+    .bodytext{
+      margin-top:10px;color:var(--muted);line-height:1.4;font-size:14px
+    }
+    .link{
+      color: var(--accent2);
+      text-decoration:none;
+      border-bottom:1px dashed rgba(95,208,255,.45);
+      cursor:pointer;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:14px;
+      margin-top:14px;
+    }
+    @media (max-width: 760px){
+      .grid{grid-template-columns:1fr}
+    }
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .cardHead{
+      padding:14px 16px;
+      background: rgba(0,0,0,.18);
+      border-bottom:1px solid var(--line);
+      font-weight:700;
+      letter-spacing:.2px;
+    }
+    .cardBody{padding:16px}
+    label{display:block;font-size:13px;color:var(--muted);margin:0 0 6px}
+    input, select{
+      width:100%;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.25);
+      color: var(--text);
+      outline:none;
+    }
+    input:focus, select:focus{border-color: rgba(95,208,255,.55)}
+    .radios{display:grid;gap:10px}
+    .radio{
+      display:flex;gap:10px;align-items:flex-start;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.18);
+      cursor:pointer;
+    }
+    .radio input{width:auto;margin-top:2px}
+    .notice{
+      margin-top:14px;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px dashed rgba(255,255,255,.16);
+      background: rgba(255,255,255,.04);
+      color: var(--muted);
+      font-size:13px;
+      line-height:1.35;
+    }
+    .actions{
+      display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;
+      margin-top:14px;
+    }
+    button{
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background: linear-gradient(135deg, rgba(68,255,154,.18), rgba(95,208,255,.18));
+      color: var(--text);
+      font-weight:800;
+      cursor:pointer;
+      min-width: 170px;
+    }
+    button:disabled{opacity:.6;cursor:not-allowed}
+    .small{font-size:12px;color:var(--muted)}
+    .msg{
+      margin-top:12px;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.22);
+      color: var(--muted);
+      display:none;
+    }
+    .msg.ok{border-color: rgba(68,255,154,.35); color:#c9ffe6}
+    .msg.err{border-color: rgba(255,91,110,.45); color:#ffd2d8}
+    .modalBack{
+      position:fixed;inset:0;
+      background: rgba(0,0,0,.65);
+      display:none;
+      align-items:center;justify-content:center;
+      padding:18px;
+      z-index:9999;
+    }
+    .modal{
+      width:min(980px, 96vw);
+      height:min(80vh, 700px);
+      background: var(--card);
+      border:1px solid var(--line);
+      border-radius:18px;
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+    }
+    .modalTop{
+      padding:12px 14px;
+      background: rgba(0,0,0,.18);
+      border-bottom:1px solid var(--line);
+      display:flex;justify-content:space-between;align-items:center;
+      font-weight:800;
+    }
+    .closeBtn{
+      background: rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:12px;
+      padding:8px 10px;
+      cursor:pointer;
+      font-weight:800;
+    }
+    iframe{border:0; width:100%; height:100%; background:#fff}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="hero">
+      <div class="title">
+        <h1>ZpA Desert Storm Sign Up</h1>
+        <div class="badge" id="windowBadge">Loading window…</div>
+      </div>
+
+      <div class="bodytext">
+        We play DS following a battle plan which can be found here:
+        <span class="link" id="planLink">View Battle Plan</span><br><br>
+        Please do not mark <b>Yes, I will for sure be there</b>, unless you will. We are full every DS —
+        this means some starters will be placed on sub, and a few sub spots are rotated each week.
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <div class="cardHead">Your Details</div>
+        <div class="cardBody">
+          <label for="username">1. In Game Username</label>
+          <input id="username" placeholder="Example: Shauna" autocomplete="off" />
+
+          <div style="height:12px"></div>
+
+          <label for="squadType">2. Main Squad Type</label>
+          <select id="squadType">
+            <option value="" selected disabled>Select…</option>
+            <option>Air</option>
+            <option>Missile</option>
+            <option>Tank</option>
+          </select>
+
+          <div style="height:12px"></div>
+
+          <label for="squadPower">3. Main Squad Power</label>
+          <input id="squadPower" inputmode="numeric" placeholder="Example: 41 or 4124 → 41.24" />
+          <div class="small" style="margin-top:6px">Tip: if you type 4124 it becomes 41.24 automatically.</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="cardHead">Availability</div>
+        <div class="cardBody">
+          <label>4. Desert Storm Registration</label>
+          <div class="radios">
+            <label class="radio"><input type="radio" name="registration" value="Yes, I will for sure be there"> Yes, I will for sure be there</label>
+            <label class="radio"><input type="radio" name="registration" value="I may not make it, sign me up as sub!"> I may not make it, sign me up as sub!</label>
+            <label class="radio"><input type="radio" name="registration" value="Sorry, I can't make it"> Sorry, I can't make it</label>
+          </div>
+
+          <div class="notice">
+            We will try to run 2 times if we get enough sign ups. If we cannot, and can only run a time you did not select, you will not be included.
+            If you select any, you will be included regardless of DS time slot.
+          </div>
+
+          <div style="height:12px"></div>
+
+          <label>5. Time Preference</label>
+          <div class="radios">
+            <label class="radio"><input type="radio" name="timePref" value="Either time works for me"> Either time works for me</label>
+            <label class="radio"><input type="radio" name="timePref" value="18:00 Server time only (6 hours before reset)"> 18:00 Server time only (6 hours before reset)</label>
+            <label class="radio"><input type="radio" name="timePref" value="23:00 server time only (1 hour before reset)"> 23:00 server time only (1 hour before reset)</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button id="submitBtn">Submit</button>
+      <div class="small">We’ll remember your last answers on this device.</div>
+    </div>
+
+    <div class="msg" id="msgBox"></div>
+  </div>
+
+  <div class="modalBack" id="modalBack">
+    <div class="modal">
+      <div class="modalTop">
+        <div>Battle Plan</div>
+        <div class="closeBtn" id="closeModal">Close</div>
+      </div>
+      <iframe id="planFrame" title="Battle Plan"></iframe>
+    </div>
+  </div>
+
+<script>
+  const API_URL = "https://script.google.com/macros/s/AKfycbyA2SdqQu8g6OUFz_S-eybmlzxjIcCVgrSCsodA4SetFeloQ1cWvWCv_VoeVBogfYOF8g/exec";
+  const LS_KEY = "zpa_ds_last";
+
+  const el = (id) => document.getElementById(id);
+  const msgBox = el("msgBox");
+  const submitBtn = el("submitBtn");
+
+  let meta = null;
+
+  function showMsg(text, type){
+    msgBox.textContent = text;
+    msgBox.className = "msg " + (type || "");
+    msgBox.style.display = "block";
+  }
+  function clearMsg(){
+    msgBox.style.display = "none";
+    msgBox.textContent = "";
+  }
+
+  function normalizePowerInput(val){
+    const s = String(val || "").trim();
+    if (!s) return "";
+
+    if (s.includes(".")) {
+      const n = Number(s);
+      if (!isFinite(n)) return "";
+      return n.toFixed(2);
+    }
+    if (!/^\d+$/.test(s)) return "";
+
+    if (s.length <= 2) return Number(s).toFixed(2);
+
+    const intPart = s.slice(0,2);
+    const decPart = (s.slice(2) + "00").slice(0,2);
+    const out = Number(intPart + "." + decPart);
+    if (!isFinite(out)) return "";
+    return out.toFixed(2);
+  }
+
+  function saveLast(){
+    const data = {
+      username: el("username").value.trim(),
+      squadType: el("squadType").value,
+      squadPower: el("squadPower").value.trim(),
+      registration: document.querySelector('input[name="registration"]:checked')?.value || "",
+      timePref: document.querySelector('input[name="timePref"]:checked')?.value || ""
+    };
+    localStorage.setItem(LS_KEY, JSON.stringify(data));
+  }
+
+  function loadLast(){
+    try{
+      const raw = localStorage.getItem(LS_KEY);
+      if (!raw) return;
+      const data = JSON.parse(raw);
+
+      if (data.username) el("username").value = data.username;
+      if (data.squadType) el("squadType").value = data.squadType;
+      if (data.squadPower) el("squadPower").value = data.squadPower;
+
+      if (data.registration){
+        const r = document.querySelector(`input[name="registration"][value="${CSS.escape(data.registration)}"]`);
+        if (r) r.checked = true;
+      }
+      if (data.timePref){
+        const t = document.querySelector(`input[name="timePref"][value="${CSS.escape(data.timePref)}"]`);
+        if (t) t.checked = true;
+      }
+    }catch(e){}
+  }
+
+  async function api(action, payload){
+    const res = await fetch(API_URL, {
+      method: "POST",
+      headers: {"Content-Type":"application/json"},
+      body: JSON.stringify({action, payload})
+    });
+    return await res.json();
+  }
+
+  async function loadMeta(){
+    const r = await api("meta", {});
+    if (!r.ok) throw new Error(r.error || "Failed to load meta");
+    meta = r.meta;
+
+    const badge = el("windowBadge");
+    if (meta.isOpen){
+      badge.textContent = `OPEN • Closes ${meta.window.closeLocal} PT`;
+      submitBtn.disabled = false;
+      clearMsg();
+    } else {
+      badge.textContent = `CLOSED • Opens ${meta.window.openLocal} PT`;
+      submitBtn.disabled = true;
+      showMsg(meta.closedMessage, "err");
+    }
+
+    el("planLink").onclick = () => {
+      el("planFrame").src = meta.battlePlanUrl || "about:blank";
+      el("modalBack").style.display = "flex";
+    };
+    el("closeModal").onclick = () => {
+      el("modalBack").style.display = "none";
+      el("planFrame").src = "about:blank";
+    };
+    el("modalBack").onclick = (e) => {
+      if (e.target === el("modalBack")) el("closeModal").click();
+    };
+  }
+
+  el("squadPower").addEventListener("blur", () => {
+    const n = normalizePowerInput(el("squadPower").value);
+    if (n) el("squadPower").value = n;
+    saveLast();
+  });
+
+  ["username","squadType"].forEach(id => {
+    el(id).addEventListener("change", saveLast);
+    el(id).addEventListener("keyup", saveLast);
+  });
+  document.addEventListener("change", (e) => {
+    if (e.target && (e.target.name === "registration" || e.target.name === "timePref")) saveLast();
+  });
+
+  submitBtn.onclick = async () => {
+    clearMsg();
+
+    if (!meta || !meta.isOpen){
+      showMsg((meta && meta.closedMessage) ? meta.closedMessage : "Sign ups are closed.", "err");
+      return;
+    }
+
+    const payload = {
+      username: el("username").value.trim(),
+      squadType: el("squadType").value,
+      squadPower: el("squadPower").value.trim(),
+      registration: document.querySelector('input[name="registration"]:checked')?.value || "",
+      timePref: document.querySelector('input[name="timePref"]:checked')?.value || ""
+    };
+
+    if (!payload.username || !payload.squadType || !payload.squadPower || !payload.registration || !payload.timePref){
+      showMsg("Please fill out every field.", "err");
+      return;
+    }
+
+    const normalized = normalizePowerInput(payload.squadPower);
+    if (!normalized){
+      showMsg("Main Squad Power must be numbers only.", "err");
+      return;
+    }
+    payload.squadPower = normalized;
+    el("squadPower").value = normalized;
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Submitting…";
+
+    try{
+      const r = await api("submit", payload);
+      if (!r.ok){
+        if (r.closed){
+          showMsg(r.message || "Closed.", "err");
+        } else {
+          showMsg(r.error || "Something went wrong.", "err");
+        }
+      } else {
+        saveLast();
+        showMsg(`Submitted! ✅ Saved to tab: ${r.tabName}`, "ok");
+      }
+    }catch(err){
+      showMsg(String(err.message || err), "err");
+    }finally{
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Submit";
+    }
+  };
+
+  loadLast();
+  loadMeta().catch(err => {
+    showMsg("Setup error: " + (err.message || err), "err");
+    submitBtn.disabled = true;
+  });
+</script>
+</body>
+</html>
