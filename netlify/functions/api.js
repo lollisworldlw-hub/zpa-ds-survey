@@ -16,17 +16,29 @@ export default async (request, context) => {
     });
   }
 
-  // Pull test params from the WEBSITE URL (Netlify)
-  // Example: https://yoursite.netlify.app/?test=1&key=ZPA_TEST_123
-  const url = new URL(request.url);
-  const test = url.searchParams.get("test"); // "1"
-  const key = url.searchParams.get("key") || "";
+  // 1) Try to read test/key from the function URL (rare, since your fetch doesn't include it)
+  const fnUrl = new URL(request.url);
+  let test = fnUrl.searchParams.get("test");
+  let key = fnUrl.searchParams.get("key") || "";
 
-  // Read JSON body coming from your frontend
-  let raw = await request.text();
-  let data;
+  // 2) If not present, read from the page URL via Referer header (this is the real fix)
+  if (test !== "1" || !key) {
+    const referer = request.headers.get("referer") || request.headers.get("referrer") || "";
+    if (referer) {
+      try {
+        const refUrl = new URL(referer);
+        test = refUrl.searchParams.get("test") || test;
+        key = refUrl.searchParams.get("key") || key;
+      } catch (e) {
+        // ignore
+      }
+    }
+  }
+
+  // Read JSON body from frontend
+  let data = {};
   try {
-    data = raw ? JSON.parse(raw) : {};
+    data = await request.json();
   } catch (e) {
     data = {};
   }
@@ -34,7 +46,7 @@ export default async (request, context) => {
   // Ensure payload exists
   if (!data.payload || typeof data.payload !== "object") data.payload = {};
 
-  // If ?test=1&key=... then inject testMode + adminKey into payload
+  // Inject testMode/adminKey if present
   if (test === "1" && key) {
     data.payload.testMode = true;
     data.payload.adminKey = key;
