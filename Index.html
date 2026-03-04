@@ -4,80 +4,134 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>ZpA Desert Storm Sign Up</title>
+
   <style>
     :root{
-      --bg1:#070915;
-      --bg2:#0b0f1f;
-      --glass: rgba(20, 24, 40, .55);
-      --glass2: rgba(10, 12, 22, .55);
+      /* Gold theme */
+      --gold1:#ffd36a;
+      --gold2:#b8862b;
+      --gold3:#7a5318;
+
+      --bg1:#07070b;
+      --bg2:#0a0b12;
+
+      --glass: rgba(18, 18, 26, .62);
+      --glass2: rgba(10, 10, 16, .55);
       --stroke: rgba(255,255,255,.10);
-      --text:#eaf0ff;
-      --muted: rgba(234,240,255,.70);
-      --muted2: rgba(234,240,255,.55);
+
+      --text:#f4f0e6;
+      --muted: rgba(244,240,230,.72);
+      --muted2: rgba(244,240,230,.56);
+
       --good:#44ff9a;
       --bad:#ff5b6e;
-      --blue:#5fd0ff;
-      --shadow: 0 18px 55px rgba(0,0,0,.55);
+
+      --shadow: 0 18px 55px rgba(0,0,0,.60);
       --r: 22px;
     }
+
     *{box-sizing:border-box}
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
       color:var(--text);
       background:
-        radial-gradient(900px 600px at 12% 18%, rgba(95,208,255,.20), transparent 60%),
-        radial-gradient(900px 600px at 86% 20%, rgba(255,80,200,.18), transparent 55%),
-        radial-gradient(900px 650px at 55% 95%, rgba(68,255,154,.10), transparent 60%),
+        radial-gradient(900px 620px at 12% 18%, rgba(255,211,106,.16), transparent 60%),
+        radial-gradient(900px 600px at 86% 20%, rgba(184,134,43,.12), transparent 55%),
+        radial-gradient(900px 650px at 55% 95%, rgba(255,211,106,.08), transparent 60%),
         linear-gradient(180deg, var(--bg1), var(--bg2));
       min-height:100vh;
     }
 
-    .wrap{max-width:1120px;margin:0 auto;padding:28px 18px 40px}
+    .wrap{max-width:860px;margin:0 auto;padding:22px 14px 36px}
+
     .shell{
       border:1px solid var(--stroke);
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
       border-radius: 28px;
       box-shadow: var(--shadow);
       overflow:hidden;
     }
 
+    /* ---------- Header (mobile fixed) ---------- */
     .top{
       display:flex;
       align-items:center;
-      gap:16px;
-      padding:18px 18px;
-      background: linear-gradient(90deg, rgba(95,208,255,.12), rgba(255,80,200,.10));
+      justify-content:space-between;
+      gap:12px;
+      padding:16px;
+      flex-wrap:nowrap;
+      background:
+        radial-gradient(900px 240px at 10% 20%, rgba(255,211,106,.16), transparent 60%),
+        radial-gradient(900px 240px at 80% 30%, rgba(184,134,43,.12), transparent 60%),
+        linear-gradient(90deg, rgba(255,255,255,.05), rgba(255,255,255,.01));
       border-bottom:1px solid var(--stroke);
     }
-    .logo{
-      width:54px;height:54px;border-radius:16px;
-      background: radial-gradient(circle at 30% 30%, rgba(95,208,255,.55), rgba(255,80,200,.35), rgba(0,0,0,.25));
+
+    .topLeft{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:0;
+    }
+
+    .logoImg{
+      width:46px;
+      height:46px;
+      border-radius:14px;
+      object-fit:cover;
       border:1px solid rgba(255,255,255,.14);
       box-shadow: 0 10px 30px rgba(0,0,0,.35);
-      display:flex;align-items:center;justify-content:center;
-      font-weight:900;
-      letter-spacing:.5px;
+      flex:0 0 auto;
+      background: rgba(0,0,0,.25);
     }
-    .titleBlock{flex:1}
-    h1{margin:0;font-size:22px;letter-spacing:.2px}
-    .sub{margin-top:4px;color:var(--muted);font-size:13px;line-height:1.35}
+
+    .titleBlock{min-width:0}
+
+    h1{
+      margin:0;
+      font-size:22px;
+      line-height:1.12;
+      letter-spacing:.2px;
+      white-space:normal;      /* prevents “one word per line” */
+      word-break:normal;
+    }
+
+    .sub{
+      margin-top:4px;
+      color:var(--muted);
+      font-size:12.5px;
+      line-height:1.25;
+      max-width: 520px;
+    }
+
     .badge{
       font-size:12px;
       color:var(--muted);
       padding:8px 10px;
       border:1px solid var(--stroke);
       border-radius:999px;
-      background: rgba(0,0,0,.25);
+      background: rgba(0,0,0,.28);
       white-space:nowrap;
+      flex:0 0 auto;
     }
 
-    .content{padding:18px}
+    @media (max-width: 520px){
+      .top{
+        flex-direction:column;
+        align-items:stretch;
+        gap:10px;
+      }
+      .topLeft{width:100%}
+      h1{font-size:20px}
+      .badge{width:100%;text-align:center}
+      .sub{max-width:none}
+    }
+
+    /* ---------- Content ---------- */
+    .content{padding:16px}
+
     .pill{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:12px;
       padding:12px 14px;
       border-radius: 18px;
       border:1px solid rgba(255,255,255,.12);
@@ -85,102 +139,142 @@
       color:var(--muted);
       font-size:13px;
       line-height:1.35;
-      margin-bottom:16px;
+      margin-bottom:14px;
     }
-    .pill a{color:var(--blue);text-decoration:none;border-bottom:1px dashed rgba(95,208,255,.55)}
+    .pill a{
+      color:var(--gold1);
+      text-decoration:none;
+      border-bottom:1px dashed rgba(255,211,106,.55);
+    }
     .pill a:hover{opacity:.9}
 
-    .grid{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:16px;
-    }
-    @media (max-width: 860px){ .grid{grid-template-columns:1fr;} }
-
-    .card{
+    .form{
       border:1px solid var(--stroke);
       background: linear-gradient(180deg, rgba(0,0,0,.22), rgba(0,0,0,.12));
       border-radius: var(--r);
-      overflow:hidden;
+      padding:14px;
     }
-    .cardHead{
-      padding:14px 16px;
-      border-bottom:1px solid var(--stroke);
-      background: rgba(0,0,0,.18);
-      font-weight:800;
-      letter-spacing:.2px;
-    }
-    .cardBody{padding:16px}
 
-    label{display:block;color:var(--muted);font-size:13px;margin:0 0 7px}
+    .sectionTitle{
+      font-weight:900;
+      letter-spacing:.2px;
+      margin:4px 0 10px;
+      font-size:15px;
+      color: rgba(244,240,230,.92);
+    }
+
+    label{
+      display:block;
+      color:var(--muted);
+      font-size:12.5px;
+      margin:0 0 6px;
+    }
+
     input, select{
       width:100%;
-      padding:12px 12px;
-      border-radius:16px;
+      padding:11px 12px;
+      border-radius:14px;
       border:1px solid rgba(255,255,255,.12);
-      background: rgba(0,0,0,.22);
+      background: rgba(0,0,0,.20);
       color:var(--text);
       outline:none;
     }
-    input:focus, select:focus{border-color: rgba(95,208,255,.55)}
-    .help{margin-top:7px;color:var(--muted2);font-size:12px}
+    input:focus, select:focus{
+      border-color: rgba(255,211,106,.55);
+      box-shadow: 0 0 0 3px rgba(255,211,106,.10);
+    }
+    .help{
+      margin-top:6px;
+      color:var(--muted2);
+      font-size:12px;
+    }
 
-    .radios{display:grid;gap:10px}
+    .row{
+      display:grid;
+      grid-template-columns: 1fr 180px;
+      gap:12px;
+    }
+    @media (max-width: 560px){ .row{grid-template-columns:1fr} }
+
+    .spacer{height:12px}
+
+    .radios{display:grid;gap:8px}
     .radio{
       display:flex;gap:10px;align-items:flex-start;
-      padding:12px 12px;border-radius:16px;
+      padding:11px 12px;
+      border-radius:14px;
       border:1px solid rgba(255,255,255,.10);
-      background: rgba(0,0,0,.18);
+      background: rgba(0,0,0,.16);
       cursor:pointer;
       user-select:none;
+      transition: transform .05s ease;
     }
+    .radio:active{transform: scale(.995)}
     .radio input{width:auto;margin-top:2px}
+
+    /* subtle highlight when selected */
+    .radio:has(input:checked){
+      border-color: rgba(255,211,106,.35);
+      background: rgba(255,211,106,.06);
+    }
+
     .notice{
-      margin-top:14px;
-      padding:12px 12px;
-      border-radius:16px;
+      margin-top:10px;
+      padding:11px 12px;
+      border-radius:14px;
       border:1px dashed rgba(255,255,255,.16);
-      background: rgba(255,255,255,.04);
+      background: rgba(255,255,255,.03);
       color:var(--muted);
-      font-size:13px;
+      font-size:12.5px;
       line-height:1.35;
     }
 
     .actions{
-      display:flex;align-items:center;justify-content:space-between;gap:12px;
-      margin-top:16px;flex-wrap:wrap;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-top:14px;
+      flex-wrap:wrap;
     }
+
     .btn{
       border:0;
-      padding:14px 18px;
+      padding:13px 18px;
       border-radius: 16px;
       font-weight:900;
       letter-spacing:.2px;
-      color:#081016;
+      color:#140f07;
       cursor:pointer;
       min-width: 220px;
-      background: linear-gradient(90deg, rgba(95,208,255,.95), rgba(255,80,200,.92));
+      background: linear-gradient(90deg, var(--gold1), var(--gold2));
       box-shadow: 0 14px 40px rgba(0,0,0,.45);
     }
     .btn:disabled{opacity:.6;cursor:not-allowed}
     .small{color:var(--muted);font-size:12px}
 
     .msg{
-      margin-top:14px;
+      margin-top:12px;
       padding:12px 12px;
-      border-radius:16px;
+      border-radius:14px;
       border:1px solid rgba(255,255,255,.12);
       background: rgba(0,0,0,.22);
       display:none;
       color:var(--muted);
     }
-    .msg.ok{border-color: rgba(68,255,154,.40); color:#c9ffe6}
-    .msg.err{border-color: rgba(255,91,110,.55); color:#ffd2d8}
+    .msg.ok{
+      border-color: rgba(68,255,154,.40);
+      color:#c9ffe6
+    }
+    .msg.err{
+      border-color: rgba(255,91,110,.55);
+      color:#ffd2d8
+    }
 
-    /* modal */
+    /* ---------- Modal ---------- */
     .modalBack{
       position:fixed;inset:0;z-index:9999;
-      background: rgba(0,0,0,.70);
+      background: rgba(0,0,0,.72);
       display:none;align-items:center;justify-content:center;
       padding:18px;
     }
@@ -190,7 +284,7 @@
       border-radius: 18px;
       overflow:hidden;
       border:1px solid rgba(255,255,255,.14);
-      background: rgba(12,14,24,.92);
+      background: rgba(12,12,18,.92);
       box-shadow: var(--shadow);
       display:flex;flex-direction:column;
     }
@@ -212,85 +306,83 @@
     iframe{border:0;width:100%;height:100%;background:#fff}
   </style>
 </head>
+
 <body>
   <div class="wrap">
     <div class="shell">
       <div class="top">
-        <div class="logo">ZpA</div>
-        <div class="titleBlock">
-          <h1>ZpA Desert Storm Sign Up</h1>
-          <div class="sub">Mobile-friendly • saves your last answers on this device • writes to public + private sheets</div>
+        <div class="topLeft">
+          <img class="logoImg" src="/assets/zpa-gold.png" alt="ZPA" />
+          <div class="titleBlock">
+            <h1>ZpA Desert Storm Sign Up</h1>
+            <div class="sub">Saves your last answers • writes to public + private sheets</div>
+          </div>
         </div>
         <div class="badge" id="windowBadge">Loading…</div>
       </div>
 
       <div class="content">
         <div class="pill">
-          <div>
-            We play DS following a battle plan:
-            <a href="#" id="planLink">View Battle Plan</a><br>
-            Please do not mark <b>Yes, I will for sure be there</b> unless you will. We are full every DS — some starters will be placed on sub and a few sub spots rotate weekly.
-          </div>
+          We play DS following a battle plan:
+          <a href="#" id="planLink">View Battle Plan</a><br>
+          Please do not mark <b>Yes, I will for sure be there</b> unless you will. We are full every DS — some starters will be placed on sub and a few sub spots rotate weekly.
         </div>
 
-        <div class="grid">
-          <div class="card">
-            <div class="cardHead">Your Details</div>
-            <div class="cardBody">
-              <label for="username">1. In Game Username</label>
-              <input id="username" placeholder="Example: Lolli" autocomplete="off" />
+        <div class="form">
+          <div class="sectionTitle">1) In Game Username *</div>
+          <label for="username">Username</label>
+          <input id="username" placeholder="Example: Lolli" autocomplete="off" />
 
-              <div style="height:12px"></div>
+          <div class="spacer"></div>
 
-              <label for="squadType">2. Main Squad Type</label>
+          <div class="sectionTitle">2–3) Squad Details *</div>
+          <div class="row">
+            <div>
+              <label for="squadPower">Main Squad Power</label>
+              <input id="squadPower" inputmode="numeric" placeholder="Example: 41 or 4124 → 41.24" />
+              <div class="help">Tip: type 4124 → it becomes 41.24 automatically.</div>
+            </div>
+            <div>
+              <label for="squadType">Squad Type</label>
               <select id="squadType">
                 <option value="" selected disabled>Select…</option>
                 <option>Air</option>
                 <option>Missile</option>
                 <option>Tank</option>
               </select>
-
-              <div style="height:12px"></div>
-
-              <label for="squadPower">3. Main Squad Power</label>
-              <input id="squadPower" inputmode="numeric" placeholder="Example: 41 or 4124 → 41.24" />
-              <div class="help">Tip: type 4124 → it becomes 41.24 automatically.</div>
             </div>
           </div>
 
-          <div class="card">
-            <div class="cardHead">Availability</div>
-            <div class="cardBody">
-              <label>4. Desert Storm Registration</label>
-              <div class="radios">
-                <label class="radio"><input type="radio" name="registration" value="Yes, I will for sure be there"> Yes, I will for sure be there</label>
-                <label class="radio"><input type="radio" name="registration" value="I may not make it, sign me up as sub!"> I may not make it, sign me up as sub!</label>
-                <label class="radio"><input type="radio" name="registration" value="Sorry, I can't make it"> Sorry, I can't make it</label>
-              </div>
+          <div class="spacer"></div>
 
-              <div class="notice">
-                We will try to run 2 times if we get enough sign ups. If we cannot, and can only run a time you did not select, you will not be included.
-                If you select any, you will be included regardless of DS time slot.
-              </div>
-
-              <div style="height:12px"></div>
-
-              <label>5. Time Preference</label>
-              <div class="radios">
-                <label class="radio"><input type="radio" name="timePref" value="Either time works for me"> Either time works for me</label>
-                <label class="radio"><input type="radio" name="timePref" value="18:00 Server time only (6 hours before reset)"> 18:00 Server time only (6 hours before reset)</label>
-                <label class="radio"><input type="radio" name="timePref" value="23:00 server time only (1 hour before reset)"> 23:00 server time only (1 hour before reset)</label>
-              </div>
-            </div>
+          <div class="sectionTitle">4) Desert Storm Registration *</div>
+          <div class="radios">
+            <label class="radio"><input type="radio" name="registration" value="Yes, I will for sure be there"> Yes, I will for sure be there</label>
+            <label class="radio"><input type="radio" name="registration" value="I may not make it, sign me up as sub!"> I may not make it, sign me up as sub!</label>
+            <label class="radio"><input type="radio" name="registration" value="Sorry, I can't make it"> Sorry, I can't make it</label>
           </div>
-        </div>
 
-        <div class="actions">
-          <button class="btn" id="submitBtn">Submit</button>
-          <div class="small">We’ll remember your last answers on this device.</div>
-        </div>
+          <div class="notice">
+            We will try to run 2 times if we get enough sign ups. If we cannot, and can only run a time you did not select, you will not be included.
+            If you select any, you will be included regardless of DS time slot.
+          </div>
 
-        <div class="msg" id="msgBox"></div>
+          <div class="spacer"></div>
+
+          <div class="sectionTitle">5) Time Preference *</div>
+          <div class="radios">
+            <label class="radio"><input type="radio" name="timePref" value="Either time works for me"> Either time works for me</label>
+            <label class="radio"><input type="radio" name="timePref" value="18:00 Server time only (6 hours before reset)"> 18:00 Server time only (6 hours before reset)</label>
+            <label class="radio"><input type="radio" name="timePref" value="23:00 server time only (1 hour before reset)"> 23:00 server time only (1 hour before reset)</label>
+          </div>
+
+          <div class="actions">
+            <button class="btn" id="submitBtn">Submit</button>
+            <div class="small">We’ll remember your last answers on this device.</div>
+          </div>
+
+          <div class="msg" id="msgBox"></div>
+        </div>
       </div>
     </div>
   </div>
